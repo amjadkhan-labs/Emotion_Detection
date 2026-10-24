@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mood Reader — Emotion Classifier</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="stage">
+
+    <header class="masthead">
+      <span class="mark">Amjad's Lab</span>
+      <span class="divider" aria-hidden="true"></span>
+      <span class="label">a text emotion reader</span>
+    </header>
+
+    <section class="composer" id="composer">
+      <p class="eyebrow-free lede">Write a sentence. The model listens for what's underneath it.</p>
+
+      <form id="form" class="input-shell">
+        <textarea
+          id="text"
+          placeholder="I finally finished the project I've been putting off for weeks…"
+          maxlength="2000"
+          rows="3"
+          autofocus
+        ></textarea>
+        <div class="input-footer">
+          <div class="chips" id="chips">
+            <button type="button" class="chip" data-text="I am beyond excited to start this new chapter! A little nervous about the unknown, but ready to dive in and learn as much as I can.">joy</button>
+            <button type="button" class="chip" data-text="Feeling a bit lost and heavy today, just wanted to check in">sadness</button>
+            <button type="button" class="chip" data-text="Loved you yesterday, love you still, always have, always will.">love</button>
+            <button type="button" class="chip" data-text="I am furious that you missed the deadline again after I specifically warned you!">anger</button>
+            <button type="button" class="chip" data-text="My hands were shaking before I walked on stage.">fear</button>
+            <button type="button" class="chip" data-text="That plot twist at the end of the movie came completely out of nowhere.">surprise</button>
+          </div>
+          <div class="input-actions">
+            <span class="counter"><span id="count">0</span>/2000</span>
+            <button type="submit" id="submitBtn" class="analyze-btn">
+              <span class="btn-label">Read it</span>
+              <span class="btn-hint">⌘⏎</span>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <p class="status-line" id="statusLine" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="reveal" id="reveal" aria-live="polite">
+      <div class="reveal-empty" id="revealEmpty">
+        <svg class="pulse-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path id="pulseLine" d="M2 24 H14 L19 10 L27 38 L32 24 H46" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p>Nothing read yet — the reading appears here.</p>
+      </div>
+
+      <div class="reveal-result" id="revealResult" hidden>
+        <div class="result-top">
+          <div class="result-word">
+            <span class="result-emoji" id="resultEmoji">🙂</span>
+            <h1 id="resultEmotion">joy</h1>
+          </div>
+          <div class="result-confidence">
+            <span class="confidence-number" id="confidenceNumber">0</span><span class="confidence-sign">%</span>
+            <span class="confidence-caption">confidence</span>
+          </div>
+        </div>
+
+        <p class="result-quote" id="resultQuote"></p>
+
+        <div class="breakdown" id="breakdown"></div>
+      </div>
+    </section>
+
+  </main>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
